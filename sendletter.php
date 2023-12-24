@@ -1,3 +1,4 @@
+<?php
 include 'config.php';
 use configuration\config;
 if(file_get_contents("game/gamestarted.txt") == ""){
@@ -45,6 +46,7 @@ if(!in_array($yourid, explode(',', $context))){
         file_put_contents("game/word.txt", "");
         file_put_contents("game/unhidded.txt", "");
         file_put_contents("users.txt", "");
+        file_put_contents("game/winned.txt", $yourid);
         return;
       }
       
