@@ -50,6 +50,7 @@ if($clienttoken == $servertoken){
     file_put_contents("game/word.txt", openssl_encrypt($randomizedword, "AES-128-ECB", config::$passwordcipher));
     file_put_contents("game/unhidded.txt", str_repeat('*', mb_strlen($randomizedword)));
     file_put_contents("game/gamestarted.txt", "true");
+    file_put_contents("game/winned.txt", "");
     }
   }
   echo config::$codesuccessauth . " {$rand}";
