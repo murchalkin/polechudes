@@ -15,7 +15,7 @@ class config{
   public static $codesuccessauth = ""; // success auth code returning to client
 
   // Game
-  public static $words = "шмыгыч,циркачи,выебоны,чмарина"; // words generating(dont use spaces, dont use numbers)
+  public static $words = "стол,кошка,табуретка"; // words generating(dont use spaces, dont use numbers)
   public static $codeerrordontstarted = "Игра не начата"; // error game not started code returning to client
   public static $codeerrordontauthorized = "Вы не авторизованы"; // code error when dont authorized
   public static $codedontqueue = "Не ваша очередь называть букву"; // code dont you queue returning to client
