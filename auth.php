@@ -13,6 +13,12 @@ if(str_contains(config::$words, ' ')){
   echo config::$codeerrorserver;
   return;
 }
+for($i = 0; $i < 9; $i++){
+  if(str_contains(config::$words, "{$i}")){
+    echo config::$codeerrorserver;
+    return;
+  }
+}
 $clienttoken = openssl_decrypt($_GET['token'], "AES-128-ECB", config::$passwordcipher);
 $servertoken = config::$token;
 if($clienttoken == $servertoken){
@@ -53,7 +59,7 @@ if($clienttoken == $servertoken){
     file_put_contents("game/winned.txt", "");
     }
   }
-  echo config::$codesuccessauth . " {$rand}";
+  echo $rand;
 }else{
   echo config::$codeerrorauth;
 }
