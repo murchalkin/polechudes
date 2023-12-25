@@ -7,5 +7,5 @@ public class Config : MonoBehaviour
      // Global
      public static string mainurl = "https://mushypreciousapplicationstack.nikitychkitych.repl.co"; // main url server
      public static string tokenauth = "vsiJrFivtbMlnxOH8FYBeQ=="; // hashed token for auth on server
-     public static float keepalivetime = 0.1f; // keep alive time (seconds, allowed digits)
+     public static float keepalivetime = 0.5f; // keep alive time (seconds, allowed digits)
 }
