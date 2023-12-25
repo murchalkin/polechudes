@@ -1,0 +1,25 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public class Auth : MonoBehaviour
+{
+    public static string myid;
+    // Start is called before the first frame update
+    void Start()
+    {
+        StartCoroutine(Auther());
+    }
+    IEnumerator Auther(){
+       UnityWebRequest request = UnityWebRequest.Get($"{Config.mainurl}/auth.php?token={Config.tokenauth}");
+       yield return request.SendWebRequest();
+       if(request.downloadHandler.text != "Ошибка авторизации" && request.downloadHandler.text != "Сервер переполнен" && request.downloadHandler.text != "Ошибка сервера"){
+         myid = request.downloadHandler.text;
+         print($"Received generated id client: {myid}");
+       }else{
+          print(request.downloadHandler.text);
+       }
+       
+    }
+}
