@@ -23,6 +23,7 @@ $clienttoken = openssl_decrypt($_GET['token'], "AES-128-ECB", config::$passwordc
 $servertoken = config::$token;
 if($clienttoken == $servertoken){
   $contextt = file_get_contents("game/users.txt");
+  $kicked = false;
   if(count(explode(',', $contextt)) >= config::$clientsstart){
     $minute = date('i');
     $hour = date('H');
@@ -36,6 +37,7 @@ if($clienttoken == $servertoken){
           if($arraykeepalive[$indexika] < config::$minkeepalivesneed){
             unset($arraykeepalive[$indexika]);
             unset($contextt[$indexika]);
+            $kicked = true;
           }
           $indexika++;
 
@@ -44,7 +46,7 @@ if($clienttoken == $servertoken){
       file_put_contents("game/users.txt", $contextt);
       file_put_contents("game/timeng.txt", strval($newtime));
     }
-    else{
+    if(!$kicked){
       file_put_contents("game/timeng.txt", strval($newtime));
       echo config::$codeerrorfull;
       return;
