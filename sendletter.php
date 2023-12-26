@@ -47,6 +47,7 @@ if(!in_array($yourid, explode(',', $context))){
         file_put_contents("game/unhidded.txt", "");
         file_put_contents("users.txt", "");
         file_put_contents("game/winned.txt", $yourid);
+        file_put_contents("game/timeng.txt", "");
         return;
       }
       
