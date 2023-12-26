@@ -49,6 +49,13 @@ public class KeepAlive : MonoBehaviour
        if(request.downloadHandler.text == "Игра не начата"){
         log.text = "Ожидание игроков";
      }
+     if(request.downloadHandler.text == "Вы не авторизованы"){
+       log.text = "Вы были кикнуты за бездействие";
+       buttonletter.SetActive(false);
+       againbutton.SetActive(true);
+       word.text = "";
+       Auth.myid = "";
+      }
           print(request.downloadHandler.text);
        } 
        
