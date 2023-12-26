@@ -22,26 +22,26 @@ for($i = 0; $i < 9; $i++){
 $clienttoken = openssl_decrypt($_GET['token'], "AES-128-ECB", config::$passwordcipher);
 $servertoken = config::$token;
 if($clienttoken == $servertoken){
-  $context = file_get_contents("users.txt");
-  if(count(explode(',', $context)) >= config::$clientsstart){
+  $contextt = file_get_contents("game/users.txt");
+  if(count(explode(',', $contextt)) >= config::$clientsstart){
     $minute = date('i');
     $hour = date('H');
     $newtime = $minute + ($hour + 3) * 60;
     if(abs(intval(file_get_contents("game/timeng.txt")) - $newtime) >= 1){
         $keepaliver = "";
-      $context = explode(',', file_get_contents("users.txt"));
+      $contextt = explode(',', file_get_contents("game/users.txt"));
       $arraykeepalive = explode(',', file_get_contents("game/countkeepalives.txt"));
       $indexika = 0;
-      foreach($context as $keepalivee){
+      foreach($contextt as $keepalivee){
           if($arraykeepalive[$indexika] < config::$minkeepalivesneed){
             unset($arraykeepalive[$indexika]);
-            unset($context[$indexika]);
+            unset($contextt[$indexika]);
           }
           $indexika++;
 
       }
       file_put_contents("game/countkeepalives.txt", implode(',', $arraykeepalive));
-      file_put_contents("users.txt", $context);
+      file_put_contents("game/users.txt", $contextt);
       file_put_contents("game/timeng.txt", strval($newtime));
     }
     else{
@@ -51,10 +51,12 @@ if($clienttoken == $servertoken){
     }
     
   }
+  $context = file_get_contents("game/users.txt");
   $rand = rand(config::$minrandomid,config::$maxrandomid);
+  $newkarand = openssl_encrypt($rand, "AES-128-ECB", config::$passwordcipher);
   $attempts = 0;
   for($i = 0; $i < 100 * config::$maxrandomid; $i++){
-    if(!in_array("{$rand}", explode(',', $context))){
+    if(!in_array($newkarand, explode(',', $context))){
        $attempts++;
        break;
     }else{
@@ -66,12 +68,11 @@ if($clienttoken == $servertoken){
     echo config::$codeerrorfull;
     return;
   }
-  
   if($context == ""){
-    file_put_contents("users.txt", "{$rand}");
+    file_put_contents("game/users.txt", "{$newkarand}");
   }else{
-    $context = $context . ",{$rand}";
-    file_put_contents("users.txt", $context);
+    $context = $context . ",{$newkarand}";
+    file_put_contents("game/users.txt", $context);
   }
   $keepaliverr = "";
   foreach(explode(',', $context) as $keepalivee){
