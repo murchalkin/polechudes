@@ -10,6 +10,7 @@ public class SendLetter : MonoBehaviour
     public Text log;
 
     public void SendLetterr(){
+       if(inputfieldletter.text == "") return;
        StartCoroutine(Auther());
     }
     IEnumerator Auther(){
