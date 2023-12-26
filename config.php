@@ -12,7 +12,7 @@ class config{
   public static $maxrandomid = 1; // maximum random generating id(max length:19), dont use negative number or 0
   public static $codeerrorauth = "Ошибка авторизации"; // error auth code returning to client
   public static $codeerrorfull = "Сервер переполнен"; // error id or number clients full code returning to client
-  public static $minkeepalivesneed = 50; // minimum keep alives need every minute, if less the value, then kick client(checking inactivity clients, happens when new user want connect on full server)
+  public static $minkeepalivesneed = 40; // minimum keep alives need every minute, if less the value, then kick client(checking inactivity clients, happens when new user want connect on full server)
 
   // Game
   public static $words = "табуретка,пряник,торт,шаурма,бургер,кошка,хотдог"; // words generating(dont use spaces, dont use numbers)
