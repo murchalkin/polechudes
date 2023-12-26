@@ -43,14 +43,14 @@ public class KeepAlive : MonoBehaviour
           word.text = request.downloadHandler.text;
           yield break;
           }
-          word.text = "Выиграл игрок с айди: " + request.downloadHandler.text;
+          word.text = "Выиграл игрок с ID: " + request.downloadHandler.text;
           againbutton.SetActive(true);
        }else{
        if(request.downloadHandler.text == "Игра не начата"){
         log.text = "Ожидание игроков";
      }
      if(request.downloadHandler.text == "Вы не авторизованы"){
-       log.text = "Вы были кикнуты за бездействие";
+       log.text = "Вы были кикнуты";
        buttonletter.SetActive(false);
        againbutton.SetActive(true);
        word.text = "";
