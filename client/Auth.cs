@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 
 public class Auth : MonoBehaviour
 {
     public static string myid;
+    public Text log;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +20,7 @@ public class Auth : MonoBehaviour
          myid = request.downloadHandler.text;
          print($"Received generated id client: {myid}");
        }else{
-          print(request.downloadHandler.text);
+          log.text = request.downloadHandler.text;
        }
        
     }
