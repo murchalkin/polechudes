@@ -4,7 +4,7 @@ class config{
   // Global
   public static $passwordcipher = "password"; // password cipher
   public static $codeerrorserver = "Ошибка сервера"; // error server code returning to client
-  public static $clientsstart = 3; // clients on server for start, set -1, if dont allow connect
+  public static $clientsstart = 2; // clients on server for start, set -1, if dont allow connect
   
   // Auth
   public static $token = "мырон"; // token auth
