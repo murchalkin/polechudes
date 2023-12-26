@@ -9,13 +9,13 @@ $indexmy = 0;
 $letter = $_GET['letter'];
 $yourid = $_GET['id'];
 $showedwords = file_get_contents("game/unhidded.txt");
-$context = file_get_contents("users.txt");
+$context = file_get_contents("game/users.txt");
 $word = openssl_decrypt(file_get_contents("game/word.txt"), "AES-128-ECB", config::$passwordcipher);
 if(mb_strlen($letter) > 1){
    echo config::$codeerrorlengthletter;
   return;
 }
-if(!in_array($yourid, explode(',', $context))){
+if(!in_array(openssl_encrypt($yourid, "AES-128-ECB", config::$passwordcipher), explode(',', $context))){
     echo config::$codeerrordontauthorized;
     return;
 }
@@ -45,7 +45,7 @@ if(!in_array($yourid, explode(',', $context))){
         file_put_contents("game/gamestarted.txt", "");
         file_put_contents("game/word.txt", "");
         file_put_contents("game/unhidded.txt", "");
-        file_put_contents("users.txt", "");
+        file_put_contents("game/users.txt", "");
         file_put_contents("game/winned.txt", $yourid);
         file_put_contents("game/timeng.txt", "");
         return;
