@@ -16,6 +16,10 @@ if(file_get_contents("game/gamestarted.txt") == ""){
 }
 if(in_array($yourid, explode(',', $context))){
 $showedwords = file_get_contents("game/unhidded.txt");
+$arraykeepalive = explode(',', file_get_contents("game/countkeepalives.txt"));
+$indexik = array_search($yourid, explode(',', $context));
+$arraykeepalive[$indexik] = intval($arraykeepalive[$indexik]) + 1;
+file_put_contents("game/countkeepalives.txt", implode(',', $arraykeepalive));
 echo $showedwords;
 }else{
   echo config::$codeerrordontauthorized;
