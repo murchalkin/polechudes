@@ -1,6 +1,13 @@
 <?php
 include 'config.php';
 use configuration\config;
+if(config::$OptimizeForJs == True){
+header('Access-Control-Allow-Origin: *'); 
+header("Access-Control-Allow-Credentials: true");
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Max-Age: 1000');
+header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token , Authorization');
+}
 if(config::$clientsstart > config::$maxrandomid - config::$minrandomid){
   echo config::$codeerrorserver;
   return;
