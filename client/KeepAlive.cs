@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
@@ -9,9 +10,8 @@ public class KeepAlive : MonoBehaviour
 {
     public GameObject buttonletter;
     public GameObject againbutton;
-    private bool kickedme;
-    public Text word;
-    public Text log;
+    public TextMeshProUGUI word;
+    public TextMeshProUGUI log;
     private float timer;
     void Start(){
     againbutton.SetActive(false);
@@ -21,12 +21,8 @@ public class KeepAlive : MonoBehaviour
     void Update()
     {
         if(word.text != ""){
-           log.text = "";
            buttonletter.SetActive(true);
         }else{
-        if(!kickedme){
-        log.text = "Ожидание игроков...";
-        }
         buttonletter.SetActive(false);
         }
         if(timer <= 0f){
@@ -42,6 +38,9 @@ public class KeepAlive : MonoBehaviour
        UnityWebRequest request = UnityWebRequest.Get($"{Config.mainurl}/keepalive.php?id={Auth.myid}");
        yield return request.SendWebRequest();
        if(request.downloadHandler.text != "Вы не авторизованы" && request.downloadHandler.text != "Игра не начата"){
+          if(log.text == "Ожидание игроков..."){
+          log.text = "";
+         }
           try{
           int.Parse(request.downloadHandler.text);
           }catch{
@@ -53,7 +52,6 @@ public class KeepAlive : MonoBehaviour
        }else{
      if(request.downloadHandler.text == "Вы не авторизованы"){
        log.text = "Вы были кикнуты";
-       kickedme = true;
        buttonletter.SetActive(false);
        againbutton.SetActive(true);
        word.text = "";
